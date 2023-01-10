@@ -1,3 +1,9 @@
 # League-of-Legends-Ranked-Game-Analysis
 
-Constructed ML models to study the contributions of each factor to a team's winning chance.
+Constructed ML models to study the contributions of each factor to a team's winning chance, and compared the performances of different models: ensemble structures, Logistic Regression, and SVM.
+
+All models achieve a test accuracy over 85%. Among them, Ensemble models generally outperform other models, since ensembles are good at taking care of categorical data (Ex. "firstTower"), while other models like Logistic Regression actually suffer from categorical data. According to the confusion matrix, we can discover further that both ensembles predict the winning and losing teams accurately, with 86% accuracy for predicting losing teams and 88% accuracy for predicting winning teams. For Logistic Regression and SVM, however, despite a pretty good accuracy for predicting losing teams, they fail to correctly predict winning teams.
+
+This weird case can be explained by looking into the top features selected by each model. Three factors, 'towerKills', 'firstTower', and 'firstInhibitor', are present in all models. This is expected, since towers and inhibitors are the most important objectives in League of Legends. With fewer tower, your team gains less vision, and thus is more vulnerable to enemy attacks. On the other hand, the rest of the top features display a different pattern. Both ensemble models choose features relevant to dragons, but the other two models include a feature related to Baron. In League of Legends, dragons are late-game neutral objectives while Barons are early-mid game objectives. In 2020, the patches lowered the weight of early-game advantages, effectively reducing the importance of Baron, especially the first Baron acquired. For Logistic Regression and SVM, they both incorrectly put too much weight on Baron, which leads to their a-bit-worse performance in predicting winning teams compared to ensembles. This also proves the correctness of ensembles in predicting a team's winning chance.
+
+In conclusion, ensembles do a better job in predicting whether a team wins in a League of Legends match.
